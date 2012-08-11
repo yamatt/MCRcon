@@ -13,7 +13,7 @@ class MCRcon (object):
     TIME_MIDNIGHT = 18000
     TIME_DAWN = 0
     
-    def __init__(self, host, port, password):
+    def __init__(self, password, host="localhost", port=25575):
         self.__socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__socket.connect((host, port))
         self._send(3, password)
