@@ -7,7 +7,7 @@ RCon is an interface built in to the newer MineCraft Servers that allow you to c
 The advantage of this is that it should be more scriptable and you could do some more complicated things with it.
 
 # Enabling RCon
-In your Minecraft Server's config file `server.properties` change the line `rcon.enable=false` to `rcon.enable=true` and add the line `rcon.password=<password>` where <password> is the secure password you will be using from the rcon connection. Do not forget that this password will be sent in in the plain.
+In your Minecraft Server's config file `server.properties` change the line `rcon.enable=false` to `rcon.enable=true` and add the line `rcon.password=<password>` where \<password\> is the secure password you will be using from the rcon connection. Do not forget that this password will be sent in in the plain.
 
 # Using the script
 You need to initialise the object with the password (whatever you set), hostname (recommend using localhost), and the port (usually 25575).
