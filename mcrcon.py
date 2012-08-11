@@ -3,60 +3,71 @@ import select
 import struct
 import re
 
-class MCRcon:
-	GAMEMODE_SURVIVAL = 0
-	GAMEMODE_CREATIVE = 1
-	GAMEMODE_ADVENTURE = 2
-	
+class MCRcon (object):
+    GAMEMODE_SURVIVAL = 0
+    GAMEMODE_CREATIVE = 1
+    GAMEMODE_ADVENTURE = 2
+    
+    TIME_MIDDAY = 6000
+    TIME_DUSK = 12000
+    TIME_MIDNIGHT = 18000
+    TIME_DAWN = 0
+    
     def __init__(self, host, port, password):
         self.__socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.__socket.connect((host, port))
         self._send(3, password)
         
     def save_all(self):
-		return self.send("save-all")
-		
-	def save_off(self):
-		return self.send("save-off")
-		
-	def save_on(self):
-		return self.send("save-on")
-		
-	def say(self, message):
-		return self.send("say %s" % message)
-		
-	def stop(self):
-		return self.send("stop")
-		
-	def give(self, player, item, amount=1, damage=0):
-		return self.send("give %s" % " ".join([player, item, amount, damage]))
-		
-	def whitelist_on(self):
-		return self.send("whitelist on")
-		
-	def whitelist_off(self):
-		return self.send("whitelist off")
-		
-	def whitelist_add(self, name, reload_list=True):
-		message = self.send("whitelist add %s" % name)
-		if reload_list:
-			message += self.whitelist_reload()
-		return message
-		
-	def whitelist_remove(self, name, reload_list=True):
-		message = self.send("whitelist remove %s" % name)
-		if reload_list:
-			message += self.whitelist_reload()
-		return message
-		
-	def whitelist_reload(self):
-		return self.send("whitelist reload")
-		
-	def gamemode(self, mode, player=None):
-		if not player:
-			return self.send("gamemode %d" % mode)
-		else:
-			return self.send("gamemode %d %s" % (mode, player))
+        return self.send("save-all")
+        
+    def save_off(self):
+        return self.send("save-off")
+        
+    def save_on(self):
+        return self.send("save-on")
+        
+    def say(self, message):
+        return self.send("say %s" % message)
+        
+    def stop(self):
+        return self.send("stop")
+        
+    def give(self, player, item, amount=1, damage=0):
+        return self.send("give %s" % " ".join([player, item, amount, damage]))
+        
+    def whitelist_on(self):
+        return self.send("whitelist on")
+        
+    def whitelist_off(self):
+        return self.send("whitelist off")
+        
+    def whitelist_add(self, name, reload_list=True):
+        message = self.send("whitelist add %s" % name)
+        if reload_list:
+            message += self.whitelist_reload()
+        return message
+        
+    def whitelist_remove(self, name, reload_list=True):
+        message = self.send("whitelist remove %s" % name)
+        if reload_list:
+            message += self.whitelist_reload()
+        return message
+        
+    def whitelist_reload(self):
+        return self.send("whitelist reload")
+        
+    def gamemode(self, mode, player=None):
+        if not player:
+            return self.send("gamemode %d" % mode)
+        else:
+            return self.send("gamemode %d %s" % (mode, player))
+            
+    def time_set(self, time):
+        return self.send("time set %d" % time)
+        
+    def time_add(self, time):
+        return self.send("time add %d" % time)
     
     def close(self):
         self.__socket.close()
