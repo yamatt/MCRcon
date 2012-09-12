@@ -1,4 +1,4 @@
-# MCRon
+# MrCon
 Is a fork of barneygale/MCRcon designed to allow easier object wrapping of a Minecraft Server via the RCon interface. Along with some scripts to allow easier administration.
 
 # Why?

@@ -3,7 +3,10 @@ import select
 import struct
 import re
 
-class MCRcon (object):
+class MCItemEnums(object):
+	pass
+
+class MrConInterface (object):
     GAMEMODE_SURVIVAL = 0
     GAMEMODE_CREATIVE = 1
     GAMEMODE_ADVENTURE = 2
@@ -33,8 +36,14 @@ class MCRcon (object):
     def stop(self):
         return self.send("stop")
         
+    def get_seed(self):
+        return self.send("seed")
+        
+    def get_connected(self):
+        return self.send("list")
+        
     def give(self, player, item, amount=1, damage=0):
-        return self.send("give %s" % " ".join([player, item, amount, damage]))
+        return self.send("give %s %d %d %d" % (player, item, amount, damage))
         
     def whitelist_on(self):
         return self.send("whitelist on")
